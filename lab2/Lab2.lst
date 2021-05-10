@@ -1,0 +1,17 @@
+(ARCTools Version 2.1.2)
+ HexLoc     DecLoc    MachWord   Label        Instruction                Comment
+                                              .org 2048                  
+00000800  0000002048  c2002818  prog:         ld [2072], %r1             ! Your assembly code here
+00000804  0000002052  87286001                sll %r1, 1, %r3            
+00000808  0000002056  8930e018                srl %r3, 24, %r4           
+0000080c  0000002060  8a013f81                add %r4, -127, %r5         
+00000810  0000002064  ca20281c                st %r5, [2076]             
+00000814  0000002068  ffffffff                halt                       
+00000818  0000002072  c14a0000  flt:                                     ! 32-bit float to load
+0000081c  0000002076  00000000  exp:                                     ! store exponent as integer here
+                                                                         
+
+--- Symbol Table ---
+prog: 2048
+exp: 2076
+flt: 2072

@@ -1,0 +1,35 @@
+(ARCTools Version 2.1.2)
+ HexLoc     DecLoc    MachWord   Label        Instruction                Comment
+                                              .org 2048                  
+00000800  0000002048  c2002838  prog:         ld [2104], %r1             ! Your assembly code here
+00000804  0000002052  c4002838                ld [2104], %r2             
+00000808  0000002056  d400283c                ld [2108], %r10            
+                                                                         
+0000080c  0000002060  94a2a001  pow:          subcc %r10, 1, %r10        
+00000810  0000002064  04800008                ble 8                      
+                                                                         
+00000814  0000002068  86004003  multi:        add %r1, %r3, %r3          
+00000818  0000002072  84a0a001                subcc %r2, 1, %r2          
+0000081c  0000002076  14bffffe                bg -2                      
+                                                                         
+00000820  0000002080  82100003                or %r0, %r3, %r1           
+00000824  0000002084  8608c000                and %r3, %r0, %r3          
+00000828  0000002088  c4002838                ld [2104], %r2             
+0000082c  0000002092  10bffff8                ba -8                      
+                                                                         
+00000830  0000002096  c2202840  fin:          st %r1, [2112]             
+00000834  0000002100  ffffffff                halt                       
+                                                                         
+00000838  0000002104  00000004  base:                                    
+0000083c  0000002108  00000007  exp:                                     ! 4 to the power of 7 (47)
+00000840  0000002112  00000000  res:                                     ! Should be 16384 when program is done
+                                                                         
+
+--- Symbol Table ---
+res: 2112
+pow: 2060
+base: 2104
+multi: 2068
+prog: 2048
+exp: 2108
+fin: 2096

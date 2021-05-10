@@ -1,0 +1,87 @@
+! Andy Lee - 500163559
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! Q1
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+.begin
+.org 2048
+
+prog: 	ld [flt], %r1				! Your assembly code here
+	sll %r1, 1, %r3
+	srl %r3, 24, %r4
+	add %r4, -127, %r5
+	st %r5, [exp]
+	halt
+
+flt: 	0xc14a0000 			! 32-bit float to load
+exp: 	0x0 				! store exponent as integer here
+
+	.end
+
+
+
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! Q2
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+.begin
+.org 2048
+prog: 	ld [base], %r1		! Your assembly code here
+	ld [base], %r2
+	ld [exp], %r10
+	
+pow:	subcc %r10, 1, %r10
+	ble fin
+
+multi:	add %r1, %r3, %r3
+	subcc %r2, 1, %r2
+	bg multi
+	
+	mov %r3, %r1
+	clr %r3
+	ld [base], %r2
+	ba pow
+
+fin:	st %r1, [res]
+	halt
+
+	base: 4
+	exp: 7 	! 4 to the power of 7 (47)
+	res: 0 	! Should be 16384 when program is done
+
+.end
+
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! Q3
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+.begin
+.org 2048
+prog: 	ld [x], %r1		! 8
+	ld [y], %r2		! 3
+
+rep: 	cmp %r1, %r2
+	bl done
+	subcc %r1, %r2, %r3
+
+	inc %r10
+	mov %r3, %r1
+	ba rep
+
+done: 	st %r10, [quot]
+	st %r1, [rem]
+	halt
+
+
+	x: 8 ! Here, we're dividing 8/3
+	y: 3
+	quot: 0 ! Integer result would be 2 in this case
+	rem: 0 ! remainder would also be 2
+
+.end
+

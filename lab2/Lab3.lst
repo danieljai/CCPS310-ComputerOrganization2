@@ -1,0 +1,33 @@
+(ARCTools Version 2.1.2)
+ HexLoc     DecLoc    MachWord   Label        Instruction                Comment
+                                              .org 2048                  
+00000800  0000002048  c200282c  prog:         ld [2092], %r1             ! 8
+00000804  0000002052  c4002830                ld [2096], %r2             ! 3
+                                                                         
+00000808  0000002056  80a04002  rep:          subcc %r1, %r2, %r0        
+0000080c  0000002060  06800005                bl 5                       
+00000810  0000002064  86a04002                subcc %r1, %r2, %r3        
+                                                                         
+00000814  0000002068  9402a001                add %r10, 1, %r10          
+00000818  0000002072  82100003                or %r0, %r3, %r1           
+0000081c  0000002076  10bffffb                ba -5                      
+                                                                         
+00000820  0000002080  d4202834  done:         st %r10, [2100]            
+00000824  0000002084  c2202838                st %r1, [2104]             
+00000828  0000002088  ffffffff                halt                       
+                                                                         
+                                                                         
+0000082c  0000002092  00000008  x:                                       ! Here, we're dividing 8/3
+00000830  0000002096  00000003  y:                                       
+00000834  0000002100  00000000  quot:                                    ! Integer result would be 2 in this case
+00000838  0000002104  00000000  rem:                                     ! remainder would also be 2
+                                                                         
+
+--- Symbol Table ---
+x: 2092
+done: 2080
+quot: 2100
+rep: 2056
+prog: 2048
+rem: 2104
+y: 2096
